@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>色弱遊戲</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+    }
+
+    header {
+      height: 100vh;
+      background-color: lightcoral;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .page-1 {
+      width: 500px;
+      height: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .rule {
+      width: 400px;
+      height: 250px;
+      background-color: aliceblue;
+      opacity: 80%;
+      border-radius: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+    }
+
+    #start {
+      width: 200px;
+      height: 50px;
+      border-radius: 30px;
+      border: 2px solid darkslategrey;
+      font-size: 20px;
+      background-color: bisque;
+    }
+
+    li {
+      list-style: none;
+    }
+
+    main {
+      height: 100vh;
+      background-color: khaki;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      display: none;
+    }
+
+    .page-2 {
+      width: 500px;
+      height: 700px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .consent {
+      width: 500px;
+      height: 500px;
+      display: flex;
+      align-items: center;
+    }
+
+    #box {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    #box>div {
+      /* width: 100px;
+      height: 100px; */
+      border-radius: 20px;
+      /* margin: 5px; */
+      border: 5px solid khaki;
+      /* background-color: olive; */
+    }
+
+    .ansbox {
+      opacity: 60%;
+    }
+
+    .last {
+      margin-top: -30px;
+      width: 400px;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      opacity: 90%;
+    }
+
+    #time-box {
+      width: 120px;
+      height: 60px;
+      background-color: white;
+      border-radius: 20px;
+      text-align: center;
+      line-height: 60px;
+      font-size: 18px;
+      /* border: 2px solid darkolivegreen; */
+    }
+
+    .score {
+      margin-top: -30px;
+      width: 200px;
+      height: 80px;
+      border-radius: 20px;
+      background-color: white;
+      opacity: 90%;
+      text-align: center;
+      font-size: 28px;
+      line-height: 90px;
+    }
+
+    #stop {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background-color: white;
+      border: none;
+      text-align: center;
+      line-height: 65px;
+      font-size: 18px;
+    }
+
+    #sos {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background-color: white;
+      border: none;
+      text-align: center;
+      line-height: 66px;
+      font-size: 18px;
+    }
+
+    footer {
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: dimgray;
+      display: none;
+    }
+
+    .page-3 {
+      width: 400px;
+      height: 500px;
+      /* background-color: whitesmoke; */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .endding {
+      width: 400px;
+      height: 300px;
+      background-color: whitesmoke;
+      border-radius: 30px;
+      text-align: center;
+      line-height: 100px;
+      opacity: 80%;
+    }
+
+    #again {
+      width: 150px;
+      height: 40px;
+      font-size: 20px;
+      border-radius: 30px;
+    }
+
+    .act {
+      display: flex;
+    }
+
+    .no-act {
+      display: none;
+    }
+
+    .endding p {
+      font-size: 18px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="page-1">
+      <div class="rule">
+        <h1>色弱遊戲</h1>
+        <li>點擊 Start game 開始遊戲</li>
+        <li>時間計時 30 秒 後即結束遊戲</li>
+        <li>測試自己辨識顏色的能力</li>
+        <br>
+        <li>🌟小提醒🌟</li>
+        <li>點錯色塊或者點擊提示都會扣分</li>
+      </div>
+      <button id="start">Start game</button>
+    </div>
+  </header>
+  <main>
+    <div class="page-2">
+      <div class="score">score: 40</div>
+      <div class="consent">
+        <div id="box" class="randombox"></div>
+        <div class="randombox ansbox"></div>
+      </div>
+      <div class="last">
+        <div id="time-box">times up</div>
+        <button id="stop">Stop</button>
+        <button id="sos">SOS</button>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <div class="page-3">
+      <div class="endding">
+        <p>恭喜您獲得了 分</p>
+        <h1>恭喜你，艾倫葉卡</h1>
+      </div>
+      <button id="again">Play again</button>
+    </div>
+  </footer>
+
+  <script>
+    const time_box = document.querySelector('#time-box')
+    const start = document.querySelector('#start')
+    const score = document.querySelector('.score')
+    const page1 = document.querySelector('header')
+    const page2 = document.querySelector('main')
+    const page3 = document.querySelector('footer')
+
+    const stop = document.getElementById('stop')
+    const sos = document.getElementById('sos')
+    const box = document.querySelector('#box')
+    const ending = document.querySelector('.endding')
+    const again = document.querySelector('#again')
+
+    var startScore = 40;
+    var opacity = 0.6
+
+    start.onclick = function () {
+      var timeSecond = 30;
+
+      page3.classList.remove('no-act')
+      page1.classList.remove('act')
+      page1.classList.add('no-act')
+      page2.classList.add('act')
+
+      // 按下開始鍵，倒數計時從 30 秒開始
+      time_box.innerHTML = '倒數' + timeSecond + '秒'
+      // 賦予起始值為 40 分
+      score.innerHTML = 'score: ' + startScore
+
+      var level = 2
+      var num = Math.floor(Math.random() * (level * level))
+      // 亂數決定顏色
+      let r = Math.floor(Math.random() * 200)
+      let g = Math.floor(Math.random() * 200)
+      let b = Math.floor(Math.random() * 200)
+
+      // 此迴圈代表生成方塊
+      for (let i = 0; i < level * level; i++) {
+        if (i == num) {
+          box.innerHTML = box.innerHTML + `<div onclick="checkAnswer(true)" class="randombox" style="width:${100 / level}% ; height:${100 / level}%; background-color: rgb(${r}, ${g}, ${b}); opacity:${opacity};"></div>`
+        } else {
+          box.innerHTML = box.innerHTML + `<div onclick="checkAnswer(false)" class="randombox" style="width:${100 / level}% ; height:${100 / level}%; background-color: rgb(${r}, ${g}, ${b});"></div>`
+        }
+      }
+
+      // 設定倒數計時
+      var ntimeCountDow = setInterval(function () {
+        timeSecond = timeSecond - 1
+        time_box.innerHTML = `倒數 ${timeSecond} 秒`
+
+        if (timeSecond == 0) {
+          // 重置計時器
+          page2.classList.remove('act')
+          page2.classList.add('no-act')
+          page2.classList.remove('no-act')
+          page3.classList.add('act')
+
+          clearInterval(ntimeCountDow)
+
+          console.log(startScore);
+          if (startScore >= 120) {
+            ending.innerHTML = `
+            <p>恭喜您獲得了 ${startScore} 分</p> 
+            <h1>恭喜你，艾倫葉卡</h1>`
+          } else if (startScore >= 100 && startScore < 120) {
+            ending.innerHTML = `
+            <p>恭喜您獲得了 ${startScore} 分</p> 
+            <h1>您離神就差一步之遙</h1>`
+          } else if (startScore >= 80 && startScore < 100) {
+            ending.innerHTML = `
+            <p>恭喜您獲得了 ${startScore} 分</p> 
+            <h1>再 try try，相信您可以的</h1>`
+          } else {
+            ending.innerHTML = `
+            <p>恭喜您獲得了 ${startScore} 分</p> 
+            <h1>您會找到更好的出路</h1>`
+          }
+
+          // 清空方塊
+          box.innerHTML = ''
+        }
+      }, 1000)
+
+      // 設定暫停功能
+      stop.onclick = function () {
+        alert('不許壞壞！')
+      }
+
+      // HINT
+      sos.onclick = function () {
+        startScore = startScore - 5
+        score.innerHTML = 'score: ' + startScore
+        // 選取到正確答案的框框
+        const ansbox = document.querySelector('.randombox.answer')
+        // 將正確答案的框框加上css屬性變得更顯眼
+        ansbox.classList.add('act')
+      }
+
+    }
+
+    function checkAnswer(guess) {
+      if (guess) {
+        startScore = startScore + 3
+        score.innerHTML = 'score: ' + startScore
+        // 清空格子
+        box.innerHTML = ''
+
+        var level = 2
+        var num = Math.floor(Math.random() * (level * level))
+
+        // 當你 50 ~ 59 分時會生成 3x3 的方塊
+        if (startScore >= 50 && startScore < 65) {
+          level = 3
+          opacity = 0.6
+
+          // 當你 60 ~ 69 分時會生成 4x4 的方塊
+        } else if (65 <= startScore && startScore < 80) {
+          level = 4
+          opacity = 0.7
+        } else if (80 <= startScore && startScore < 90) {
+          level = 5
+          opacity = 0.8
+        } else if (90 <= startScore && startScore < 105) {
+          level = 6
+          opacity = 0.85
+        } else if (105 <= startScore) {
+          level = 7
+          opacity = 0.9
+        }
+
+        num = Math.floor(Math.random() * (level * level))
+
+        let r = Math.floor(Math.random() * 200)
+        let g = Math.floor(Math.random() * 200)
+        let b = Math.floor(Math.random() * 200)
+        // 此迴圈代表生成方塊
+        for (let i = 0; i < level * level; i++) {
+          if (i == num) {
+            box.innerHTML = box.innerHTML + `<div onclick="checkAnswer(true)" class="randombox" style="width:${100 / level}% ; height:${100 / level}%; background-color: rgb(${r}, ${g}, ${b}); opacity:${opacity};"></div>`
+          } else {
+            box.innerHTML = box.innerHTML + `<div onclick="checkAnswer(false)" class="randombox" style="width:${100 / level}% ; height:${100 / level}%; background-color: rgb(${r}, ${g}, ${b});"></div>`
+          }
+        }
+      } else {
+        score.innerHTML = 'score: ' + (startScore - 5);
+      }
+    }
+
+    // 再玩一次按鈕
+    again.onclick = function () {
+      page3.classList.remove('act')
+      page3.classList.add('no-act')
+      page1.classList.remove('no-act')
+      page1.classList.add('act')
+
+      // 清空分數
+      startScore = 40;
+    }
+
+  </script>
+</body>
+
+</html>
